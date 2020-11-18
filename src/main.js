@@ -31,18 +31,18 @@ export const db = firebase.firestore();
 
    It has to be combine with setUser (action) to the store
 */
-const persist = firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    let payload = {};
-    // User is signed in.
-    payload.id = user.uid;
-    store.dispatch("setUser", payload);
-    store.dispatch("fetchRegisterUserData", payload);
-  } else {
-    store.dispatch("fetchData");
-  }
-  i18n.locale = localStorage.getItem("lang") || "fr";
-});
+// const persist = firebase.auth().onAuthStateChanged((user) => {
+//   if (user) {
+//     let payload = {};
+//     // User is signed in.
+//     payload.id = user.uid;
+//     store.dispatch("setUser", payload);
+//     store.dispatch("fetchRegisterUserData", payload);
+//   } else {
+//     store.dispatch("fetchData");
+//   }
+//   i18n.locale = localStorage.getItem("lang") || "fr";
+// });
 
 router.beforeEach((to, from, next) => {
   // use language from the routing param or default language
@@ -60,11 +60,11 @@ new Vue({
   router,
   store,
   vuetify,
-  persist,
+  // persist,
   i18n,
   render: (h) => h(App),
   created() {
-    this.$store.dispatch("fetchData");
+    // this.$store.dispatch("fetchData");
     window.addEventListener("resize", this.$store.commit("setWindowWidth"));
   },
 }).$mount("#app");
